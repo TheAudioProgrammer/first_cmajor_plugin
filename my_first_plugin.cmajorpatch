@@ -1,0 +1,22 @@
+
+{
+    "CmajorVersion":    1,
+    "ID":               "com.cmajor.sinesynth",
+    "version":          "1.0",
+    "name":             "Sine synth",
+    "description":      "This is a simple sine wave synth with a custom web view.",
+    "category":         "generator",
+    "manufacturer":     "TAP",
+    "isInstrument":     true,
+
+    "source":           "my_first_plugin.cmajor",
+
+    "view":             {
+                            "src": "view/index.js",
+                            "width": 400,
+                            "height": 400,
+                            "resizable": false
+                        }
+
+
+}
