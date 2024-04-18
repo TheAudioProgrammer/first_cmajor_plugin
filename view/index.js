@@ -1,4 +1,9 @@
 
+
+/*
+    This simple web component just manually creates a set of plain sliders for the
+    known parameters, and uses some listeners to connect them to the patch.
+*/
 class MyView extends HTMLElement
 {
     constructor (patchConnection)
@@ -6,7 +11,7 @@ class MyView extends HTMLElement
         // Super allows the use of the "this" keyword
         super();
         this.patchConnection = patchConnection;
-        this.classList = "view-patch-element";
+        this.classList.add("view-patch-element");
         this.innerHTML = this.getHTML();
     }
 
@@ -44,29 +49,42 @@ class MyView extends HTMLElement
     return `
     <style>
         .view-patch-element {
-            background: #bcb;
+            font-family: Verdana, sans-serif;
+            text-align: center;
             display: block;
             width: 100%;
             height: 100%;
             padding: 10px;
             overflow: auto;
+            flex-direction: column;
+            align-items: center;
+            background-color: lightblue;
         }
 
+        .view-patch-element #tap-logo {
+            margin-top: 10px;
+            top: 10px;
+            width: 200px;
+        }
+        
         .param {
             display: inline-block;
             margin: 10px;
-            width: 300px;
+            width: 200px;
         }
     </style>
 
-    <div id="controls">
-      <input type="range" class="param" id="frequency" min="20" max="1000">Frequency</input>
-    </div>`;
+    <body>
+        <img id="tap-logo" src="./Resources/tap_logo.png" alt="tap logo">
+
+        <div id="controls">
+          <input type="range" class="param" id="frequencyIn" min="20" max="20000">Frequency</input>
+          <input type="range" class="param" id="volume" min="-84" max="6">Gain</input>
+        </div>`;
     }
 }
 
-// This is the line that registers our custom element with the browser
-window.customElements.define ("my-first-plugin", MyView);
+window.customElements.define ("simplegain-view", MyView);
 
 /* This is the function that a host (the command line patch player, or a Cmajor plugin
    loader, or our VScode extension, etc) will call in order to create a view for your patch.
@@ -74,14 +92,8 @@ window.customElements.define ("my-first-plugin", MyView);
    Ultimately, a DOM element must be returned to the caller for it to append to its document.
    However, this function can be `async` if you need to perform asyncronous tasks, such as
    fetching remote resources for use in the view, before completing.
-
-   When using libraries such as React, this is where the call to `ReactDOM.createRoot` would
-   go, rendering into a container component before returning.
 */
-
-export default function createView (patchConnection)
+export default function createPatchView (patchConnection)
 {
     return new MyView (patchConnection);
 }
-
-
