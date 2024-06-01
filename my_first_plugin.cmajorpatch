@@ -11,12 +11,11 @@
 
     "source":           "my_first_plugin.cmajor",
 
-    "view":             {
-                            "src": "view/index.js",
-                            "width": 400,
-                            "height": 400,
-                            "resizable": false
-                        }
-
-
+    "view": 
+    {
+      "src":       "view/index.js",
+      "width":     400,
+      "height":    400,
+      "resizable": false
+    }
 }

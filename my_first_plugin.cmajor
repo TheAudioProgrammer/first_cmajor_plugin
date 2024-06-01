@@ -10,21 +10,29 @@ graph my_first_plugin  [[ main ]]
     output stream float out;
 
     // This is one way you can define parameters that can be connected to a custom UI
-    input osc.frequencyIn [[ min: 20.0, max: 20000.0 ]];
-    input gain.volume [[ min: -84.0, max: 6.0 ]];
+    input osc.frequencyIn [[ min: 20.0, max: 20000.0, init: 300.0 ]];
+    input gain.volume [[ min: -84.0, max: 6.0, init: -12.0 ]];
 
     // A node is a simple audio processor.  
     // If we wanted, we could create our own custom node using Processor 
-    node osc = std::oscillators::Sine (float, 300.0);
-    node gain = std::levels::SmoothedGain (float, 0.0);
+    node osc = std::oscillators::Sine (float);
+    node gain = std::levels::SmoothedGain (float);
 
     // Connect the nodes together
     connection osc.out -> gain.in;
     connection gain.out -> out;
 }
 
+
+
+
+
+
+
+
+
 /*
-    Note: In this example, I've created each input, node, and connection explicitly...
+    Note: In the example above, I've created each input, node, and connection explicitly...
 
     I think this is a good way to start when you're learning, because it makes it clear what's going on.
 
